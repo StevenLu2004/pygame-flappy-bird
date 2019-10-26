@@ -1,9 +1,24 @@
 from gameConstants import *
-import pygame
+import os
+import sys
 from colorAPI import *
 from bird import Bird
 from scene import Scene
 from gameScene import GameScene
+
+try:
+    import pygame
+except:
+    print("ERR: Failed to import pygame. Attempting to install.", file=sys.stderr)
+    try:
+        os.system("python3 -m pip install pygame")
+    except:
+        print("ERR: Failed to install pygame. Retrying with administrator access.", file=sys.stderr)
+        try:
+            os.system("sudo python3 -m pip install pygame")
+        except:
+            print("ERR: Failed to install pygame with administrator access. Exit program.", file=sys.stderr)
+            exit(1)
 
 def main():
     # Initialize PyGame
