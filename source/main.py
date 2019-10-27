@@ -1,10 +1,6 @@
 from gameConstants import *
 import os
 import sys
-from colorAPI import *
-from bird import Bird
-from scene import Scene
-from gameScene import GameScene
 
 try:
     import pygame
@@ -19,6 +15,11 @@ except:
         except:
             print("ERR: Failed to install pygame with administrator access. Exit program.", file=sys.stderr)
             exit(1)
+
+from colorAPI import *
+from bird import Bird
+from scene import Scene
+from gameScene import GameScene
 
 def main():
     # Initialize PyGame
