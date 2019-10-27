@@ -15,6 +15,8 @@ except:
         except:
             print("ERR: Failed to install pygame with administrator access. Exit program.", file=sys.stderr)
             exit(1)
+    print("Please restart.")
+    exit(0)
 
 from colorAPI import *
 from bird import Bird
