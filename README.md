@@ -19,9 +19,9 @@ python3 source/main.py
 
 # Windows
 # Either
-python3 source/main.py
+python3 source\main.py
 # Or
-py -3 source/main.py
+py -3 source\main.py
 # Depending on the installation of Python 3 on your PC
 ```
 
