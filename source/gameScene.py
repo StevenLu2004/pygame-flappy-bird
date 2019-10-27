@@ -9,6 +9,9 @@ from bound import Bound
 from timeit import default_timer as timer
 
 obsGenModes = {"single": 0.8, "tri-tunnel": 0.18, "penta-tunnel": 0.02}
+# obsGenModes = {"single": 1, "tri-tunnel": 0, "penta-tunnel": 0}
+# obsGenModes = {"single": 0, "tri-tunnel": 1, "penta-tunnel": 0}
+# obsGenModes = {"single": 0, "tri-tunnel": 0, "penta-tunnel": 1}
 
 def randMode():
     m = random.random()
@@ -45,17 +48,19 @@ class GameScene(Scene):
         if mode == "single":
             self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING, "height": random.randint(0, RES[1] - OBS_SPACING), "spacing": OBS_SPACING})
         elif mode == "tri-tunnel":
-            height = random.randint(0, RES[1] - OBS_SPACING)
+            vary = random.randint(-1, 1)
+            height = random.randint(0, RES[1] - OBS_SPACING - (OBS_TUNNEL_VARIATION*2 if vary else 0)) + (OBS_TUNNEL_VARIATION*2 if vary < 0 else 0)
             self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 1, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 2, "height": height, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 1, "height": height + OBS_TUNNEL_VARIATION*vary, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 2, "height": height + OBS_TUNNEL_VARIATION*vary*2, "spacing": OBS_SPACING})
         elif mode == "penta-tunnel":
-            height = random.randint(0, RES[1] - OBS_SPACING)
+            vary = random.randint(-1, 1)
+            height = random.randint(0, RES[1] - OBS_SPACING - (OBS_TUNNEL_VARIATION*4 if vary else 0)) + (OBS_TUNNEL_VARIATION*4 if vary < 0 else 0)
             self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 1, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 2, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 3, "height": height, "spacing": OBS_SPACING})
-            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 4, "height": height, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 1, "height": height + OBS_TUNNEL_VARIATION*vary, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 2, "height": height + OBS_TUNNEL_VARIATION*vary*2, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 3, "height": height + OBS_TUNNEL_VARIATION*vary*3, "spacing": OBS_SPACING})
+            self.plannedObsGen.append({"time": t + OBS_GEN_TIMESPACING + 4, "height": height + OBS_TUNNEL_VARIATION*vary*4, "spacing": OBS_SPACING})
 
     def update(self, deltaTime, keyStrokes, events, activeScene):
         self.activeScene = activeScene
