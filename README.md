@@ -2,6 +2,10 @@
 
 PyGame implementation of Flappy Bird
 
+## Notifications
+
+This project is a practice assignment from a club in my highschool. As we are moving onto building a platformer, I'm not gonna work on this for a while. This won't get any better than Geometry Dash anyway.
+
 ## Install
 
 Since I haven't packaged this project, you gotta have [Python 3](https://www.python.org) installed.
